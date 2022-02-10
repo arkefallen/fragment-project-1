@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SimpleFragment.OnFragmentInteractionListener {
 
     private Button openBtn;
 
@@ -80,11 +80,11 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
-//
-//    @Override
-//    public void OnRadioButtonChoiceChecked(int choice) {
-//        // menyimpan pilihan radio button yang nantinya akan dimunculkan lagi di fragment
-//        mainActRadioButtonChoice = choice;
-//        Toast.makeText(this, "Choice is" + Integer.toString(choice), Toast.LENGTH_SHORT).show();
-//    }
+
+    @Override
+    public void OnRadioButtonChoiceChecked(int choice) {
+        // menyimpan pilihan radio button yang nantinya akan dimunculkan lagi di fragment
+        mainActRadioButtonChoice = choice;
+        Toast.makeText(this, "Choice is " + Integer.toString(choice), Toast.LENGTH_SHORT).show();
+    }
 }

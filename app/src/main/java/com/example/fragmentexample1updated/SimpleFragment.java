@@ -26,42 +26,42 @@ public class SimpleFragment extends Fragment {
     // Kondisi pilihan yang dipilih user di fragment
     private static final int YES = 0;
     private static final int NO = 1;
-//    private static final int NONE = 2;
+    private static final int NONE = 2;
 
-    // Variabel untuk menyimpan pilihan radio button
-//    private int mainActCurrentChoice = NONE;
+//  Variabel untuk menyimpan pilihan radio button
+    private int mainActCurrentChoice = NONE;
 
-    // Di attach ke MainActivity ( host ) untuk ngasih tau state fragment
-//    private OnFragmentInteractionListener mainActListener;
-//    interface OnFragmentInteractionListener {
-//        void OnRadioButtonChoiceChecked(int choice);
-//    }
+//     Di attach ke MainActivity ( host ) untuk ngasih tau state fragment
+    private OnFragmentInteractionListener mainActListener;
+    interface OnFragmentInteractionListener {
+        void OnRadioButtonChoiceChecked(int choice);
+    }
 
-    // method ini dipanggil saat fragment nya ditempelkan ke activity
-//    @Override
-//    public void onAttach(@NonNull Context context) {
-//        super.onAttach(context);
-//
-//        // Cek apakah host activity udah implementasi interface onRadioButtonChoiceChecked
-//        if ( context instanceof OnFragmentInteractionListener ) {
-//            mainActListener = (OnFragmentInteractionListener) context;
-//        }
-//        else {
-//            throw new ClassCastException(context.toString()
-//                + getResources().getString(R.string.exception_message));
-//        }
-//    }
+//  method ini dipanggil saat fragment nya ditempelkan ke activity
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
 
-//    private static final String CHOICE = "choice";
+        // Cek apakah host activity udah implementasi interface onRadioButtonChoiceChecked
+        if ( context instanceof OnFragmentInteractionListener ) {
+            mainActListener = (OnFragmentInteractionListener) context;
+        }
+        else {
+            throw new ClassCastException(context.toString()
+                + getResources().getString(R.string.exception_message));
+        }
+    }
 
-//    // TODO: Rename parameter arguments, choose names that match
-//    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-//
-//    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
+    private static final String CHOICE = "choice";
+
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
 
     public SimpleFragment() {
         // Required empty public constructor
@@ -77,20 +77,21 @@ public class SimpleFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static SimpleFragment newInstance(int choice) {
-        //        Bundle arguments = new Bundle();
-//        arguments.putInt(CHOICE,choice);
-//        fragment.setArguments(arguments);
-        return new SimpleFragment();
+        SimpleFragment fragment = new SimpleFragment();
+        Bundle arguments = new Bundle();
+        arguments.putInt(CHOICE,choice);
+        fragment.setArguments(arguments);
+        return fragment;
     }
 
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-//    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
 
     // Tempat buat ngeload fragment nya dimana
     @Override
@@ -100,14 +101,15 @@ public class SimpleFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_simple, container, false);
 
         RadioGroup radioGroup = rootView.findViewById(R.id.radio_group);
-//
-//        if (getArguments().containsKey(CHOICE)) {
-//            mainActCurrentChoice = getArguments().getInt(CHOICE);
-//            if (mainActCurrentChoice != NONE ) {
-//                radioGroup.check(radioGroup.getChildAt(mainActCurrentChoice).getId());
-//            }
-//        }
-//
+
+        if (getArguments().containsKey(CHOICE)) {
+            mainActCurrentChoice = getArguments().getInt(CHOICE);
+
+            if (mainActCurrentChoice != NONE ) {
+                radioGroup.check(radioGroup.getChildAt(mainActCurrentChoice).getId());
+            }
+        }
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -117,18 +119,18 @@ public class SimpleFragment extends Fragment {
 
                 if ( idx == YES  ) {
                     textView.setText(R.string.yes_message);
-//                    mainActCurrentChoice = YES;
-//                    mainActListener.OnRadioButtonChoiceChecked(YES);
+                    mainActCurrentChoice = YES;
+                    mainActListener.OnRadioButtonChoiceChecked(YES);
                 }
                 else if(idx == NO) {
                     textView.setText(R.string.no_message);
-//                    mainActCurrentChoice = NO;
-//                    mainActListener.OnRadioButtonChoiceChecked(NO);
+                    mainActCurrentChoice = NO;
+                    mainActListener.OnRadioButtonChoiceChecked(NO);
                 }
-//                else {
-//                    mainActCurrentChoice = NONE;
-//                    mainActListener.OnRadioButtonChoiceChecked(NONE);
-//                }
+                else {
+                    mainActCurrentChoice = NONE;
+                    mainActListener.OnRadioButtonChoiceChecked(NONE);
+                }
             }
         });
 
