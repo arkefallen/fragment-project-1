@@ -24,8 +24,8 @@ import org.w3c.dom.Text;
 public class SimpleFragment extends Fragment {
 
     // Kondisi pilihan yang dipilih user di fragment
-//    private static final int YES = 0;
-//    private static final int NO = 1;
+    private static final int YES = 0;
+    private static final int NO = 1;
 //    private static final int NONE = 2;
 
     // Variabel untuk menyimpan pilihan radio button
@@ -99,7 +99,7 @@ public class SimpleFragment extends Fragment {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_simple, container, false);
 
-//        RadioGroup radioGroup = rootView.findViewById(R.id.radio_group);
+        RadioGroup radioGroup = rootView.findViewById(R.id.radio_group);
 //
 //        if (getArguments().containsKey(CHOICE)) {
 //            mainActCurrentChoice = getArguments().getInt(CHOICE);
@@ -108,29 +108,29 @@ public class SimpleFragment extends Fragment {
 //            }
 //        }
 //
-//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                RadioButton checkedButton = radioGroup.findViewById(checkedId);
-//                int idx = radioGroup.indexOfChild(checkedButton);
-//                TextView textView = rootView.findViewById(R.id.fragment_header);
-//
-//                if ( idx == YES  ) {
-//                    textView.setText(R.string.yes_message);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton checkedButton = radioGroup.findViewById(checkedId);
+                int idx = radioGroup.indexOfChild(checkedButton);
+                TextView textView = rootView.findViewById(R.id.fragment_header);
+
+                if ( idx == YES  ) {
+                    textView.setText(R.string.yes_message);
 //                    mainActCurrentChoice = YES;
 //                    mainActListener.OnRadioButtonChoiceChecked(YES);
-//                }
-//                else if(idx == NO) {
-//                    textView.setText(R.string.no_message);
+                }
+                else if(idx == NO) {
+                    textView.setText(R.string.no_message);
 //                    mainActCurrentChoice = NO;
 //                    mainActListener.OnRadioButtonChoiceChecked(NO);
-//                }
+                }
 //                else {
 //                    mainActCurrentChoice = NONE;
 //                    mainActListener.OnRadioButtonChoiceChecked(NONE);
 //                }
-//            }
-//        });
+            }
+        });
 
         return rootView;
     }
